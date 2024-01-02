@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUpdateAddressDto } from './dto/create-update-address.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address } from './entities/address.entity';
@@ -39,6 +43,11 @@ export class AddressService {
   async remove(id: number) {
     const savedAddress = await this.addressRepository.findOne({
       where: { id },
+      relations: {
+        persona: {
+          direcciones: true,
+        },
+      },
     });
 
     if (!savedAddress) {
@@ -47,6 +56,19 @@ export class AddressService {
       });
     }
 
-    return this.addressRepository.remove(savedAddress);
+    if (savedAddress.persona.direcciones.length === 1) {
+      throw new BadRequestException({
+        message: [
+          `La persona con el DNI ${savedAddress.persona.dni} debe tener al menos una dirección`,
+        ],
+      });
+    }
+
+    const result = await this.addressRepository.remove(savedAddress);
+
+    return {
+      ...result,
+      persona: undefined,
+    };
   }
 }

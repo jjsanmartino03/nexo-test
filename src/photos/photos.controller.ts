@@ -5,7 +5,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PhotosService } from './photos.service';
 
 @Controller('fotos')
@@ -26,6 +26,7 @@ export class PhotosController {
       required: ['foto'],
     },
   })
+  @ApiOperation({ summary: 'Cargar una foto y obtener la URL' })
   @UseInterceptors(FileInterceptor('foto'))
   async uploadPhoto(@UploadedFile() photo: Express.Multer.File) {
     return this.photosService.uploadPhoto(photo);

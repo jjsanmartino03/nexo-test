@@ -5,6 +5,7 @@ import {
   IsUrl,
   Length,
   Min,
+  MinLength,
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
@@ -55,7 +56,8 @@ export class CreatePersonDto {
   @ApiProperty({
     description: 'URL de la foto de la persona',
     type: String,
-    example: 'https://www.google.com',
+    example:
+      'https://res.cloudinary.com/dyz4ycir1/image/upload/v1704231094/ewykl1lghi8yvmssripl.jpg',
   })
   @IsUrl({}, { message: 'La foto debe ser una URL' })
   @IsDefined({ message: 'La foto es requerida' })
@@ -65,10 +67,13 @@ export class CreatePersonDto {
   @ApiProperty({
     description: 'Direcciones de la persona',
     type: [CreateUpdateAddressDto],
-    example: [{ calle: 'calle', numero: 123, ciudad: 'localidad' }],
+    example: [
+      { calle: 'Aristóbulo del Valle', numero: 1578, ciudad: 'San Francisco' },
+    ],
   })
   @IsDefined({ message: 'Las direcciones son requeridas' })
   @ValidateNested({ each: true, message: 'Las direcciones deben ser válidas' })
   @Type(() => CreateUpdateAddressDto)
+  @MinLength(1, { message: 'Debe tener al menos una dirección' })
   direcciones: CreateUpdateAddressDto[];
 }
