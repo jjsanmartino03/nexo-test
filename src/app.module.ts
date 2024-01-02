@@ -5,6 +5,7 @@ import { PeopleModule } from './people/people.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AddressModule } from './address/address.module';
+import { PhotosModule } from './photos/photos.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AddressModule } from './address/address.module';
     }),
     PeopleModule,
     AddressModule,
+    PhotosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

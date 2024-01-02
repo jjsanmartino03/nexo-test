@@ -1,14 +1,17 @@
 import { Body, Controller, Delete, Param, Put } from '@nestjs/common';
 import { AddressService } from './address.service';
-import { UpdateAddressDto } from './dto/update-address.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUpdateAddressDto } from './dto/create-update-address.dto';
 
 @Controller('direcciones')
 @ApiTags('Direcciones')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateAddressDto: CreateUpdateAddressDto,
+  ) {
     return this.addressService.update(+id, updateAddressDto);
   }
 

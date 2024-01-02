@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { createObjectCsvStringifier } from 'csv-writer';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { Person } from './entities/person.entity';
@@ -78,5 +79,42 @@ export class PeopleService {
     const person = await this.findOne(dni);
 
     return this.personRepository.remove(person);
+  }
+
+  async generateCSVData() {
+    const people = await this.findAll({});
+
+    const csvData = people.map((person) => {
+      const { dni, nombre, apellido, edad, foto } = person;
+      const direcciones = person.direcciones.map(
+        (direccion) =>
+          `${direccion.calle} ${direccion.numero}, ${direccion.ciudad}`,
+      );
+
+      return {
+        dni,
+        nombre,
+        apellido,
+        edad,
+        foto,
+        direcciones: direcciones.join('\n'),
+      };
+    });
+
+    const csvStringifier = createObjectCsvStringifier({
+      header: [
+        { id: 'dni', title: 'DNI' },
+        { id: 'nombre', title: 'Nombre' },
+        { id: 'apellido', title: 'Apellido' },
+        { id: 'edad', title: 'Edad' },
+        { id: 'foto', title: 'Foto' },
+        { id: 'direcciones', title: 'Direcciones' },
+      ],
+    });
+
+    const header = csvStringifier.getHeaderString();
+    const records = csvStringifier.stringifyRecords(csvData);
+
+    return `${header}${records}`;
   }
 }

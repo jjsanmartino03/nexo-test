@@ -8,7 +8,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateAddressDto } from '../../address/dto/create-address.dto';
+import { CreateUpdateAddressDto } from '../../address/dto/create-update-address.dto';
 import { Type } from 'class-transformer';
 
 export class CreatePersonDto {
@@ -64,11 +64,11 @@ export class CreatePersonDto {
 
   @ApiProperty({
     description: 'Direcciones de la persona',
-    type: [CreateAddressDto],
+    type: [CreateUpdateAddressDto],
     example: [{ calle: 'calle', numero: 123, ciudad: 'localidad' }],
   })
   @IsDefined({ message: 'Las direcciones son requeridas' })
   @ValidateNested({ each: true, message: 'Las direcciones deben ser válidas' })
-  @Type(() => CreateAddressDto)
-  direcciones: CreateAddressDto[];
+  @Type(() => CreateUpdateAddressDto)
+  direcciones: CreateUpdateAddressDto[];
 }

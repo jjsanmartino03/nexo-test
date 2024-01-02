@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAddressDto } from './dto/create-address.dto';
-import { UpdateAddressDto } from './dto/update-address.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUpdateAddressDto } from './dto/create-update-address.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address } from './entities/address.entity';
 import { Repository } from 'typeorm';
@@ -12,18 +11,42 @@ export class AddressService {
     @InjectRepository(Address)
     private readonly addressRepository: Repository<Address>,
   ) {}
-  async create(person: Person, createAddressDto: CreateAddressDto) {
+  async create(person: Person, createAddressDto: CreateUpdateAddressDto) {
     const address = this.addressRepository.create(createAddressDto);
     address.persona = person;
 
     return this.addressRepository.save(address);
   }
 
-  update(id: number, updateAddressDto: UpdateAddressDto) {
-    return `This action updates a #${id} address`;
+  async update(id: number, updateAddressDto: CreateUpdateAddressDto) {
+    const savedAddress = await this.addressRepository.findOne({
+      where: { id },
+    });
+
+    if (!savedAddress) {
+      throw new NotFoundException({
+        message: [`La dirección con el ID ${id} no existe`],
+      });
+    }
+
+    savedAddress.calle = updateAddressDto.calle;
+    savedAddress.numero = updateAddressDto.numero;
+    savedAddress.ciudad = updateAddressDto.ciudad;
+
+    return this.addressRepository.save(savedAddress);
   }
 
-  remove(id: number) {
-    return this.addressRepository.delete(id);
+  async remove(id: number) {
+    const savedAddress = await this.addressRepository.findOne({
+      where: { id },
+    });
+
+    if (!savedAddress) {
+      throw new NotFoundException({
+        message: [`La dirección con el ID ${id} no existe`],
+      });
+    }
+
+    return this.addressRepository.remove(savedAddress);
   }
 }
