@@ -1,7 +1,15 @@
-import {IsDefined, IsNumber, IsString, IsUrl, Length, Min, ValidateNested,} from 'class-validator';
-import {ApiProperty} from '@nestjs/swagger';
-import {CreateAddressDto} from '../../address/dto/create-address.dto';
-import {Type} from 'class-transformer';
+import {
+  IsDefined,
+  IsNumber,
+  IsString,
+  IsUrl,
+  Length,
+  Min,
+  ValidateNested,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { CreateAddressDto } from '../../address/dto/create-address.dto';
+import { Type } from 'class-transformer';
 
 export class CreatePersonDto {
   @ApiProperty({

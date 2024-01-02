@@ -1,10 +1,14 @@
-import {BadRequestException, Injectable, NotFoundException,} from '@nestjs/common';
-import {CreatePersonDto} from './dto/create-person.dto';
-import {UpdatePersonDto} from './dto/update-person.dto';
-import {Person} from './entities/person.entity';
-import {InjectRepository} from '@nestjs/typeorm';
-import {FindManyOptions, ILike, Repository} from 'typeorm';
-import {PersonQueryDto} from './dto/person.query.dto';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
+import { Person } from './entities/person.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindManyOptions, ILike, Repository } from 'typeorm';
+import { PersonQueryDto } from './dto/person.query.dto';
 
 @Injectable()
 export class PeopleService {

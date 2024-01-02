@@ -1,5 +1,12 @@
-import {ApiProperty} from '@nestjs/swagger';
-import {IsDefined, IsNumber, IsString, IsUrl, Length, Min,} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsDefined,
+  IsNumber,
+  IsString,
+  IsUrl,
+  Length,
+  Min,
+} from 'class-validator';
 
 export class UpdatePersonDto {
   @ApiProperty({

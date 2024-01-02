@@ -1,11 +1,20 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query,} from '@nestjs/common';
-import {PeopleService} from './people.service';
-import {CreatePersonDto} from './dto/create-person.dto';
-import {UpdatePersonDto} from './dto/update-person.dto';
-import {CreateAddressDto} from '../address/dto/create-address.dto';
-import {AddressService} from '../address/address.service';
-import {PersonQueryDto} from './dto/person.query.dto';
-import {ApiTags} from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { PeopleService } from './people.service';
+import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
+import { CreateAddressDto } from '../address/dto/create-address.dto';
+import { AddressService } from '../address/address.service';
+import { PersonQueryDto } from './dto/person.query.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('personas')
 @ApiTags('Personas')

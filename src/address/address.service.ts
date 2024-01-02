@@ -1,10 +1,10 @@
-import {Injectable} from '@nestjs/common';
-import {CreateAddressDto} from './dto/create-address.dto';
-import {UpdateAddressDto} from './dto/update-address.dto';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Address} from './entities/address.entity';
-import {Repository} from 'typeorm';
-import {Person} from '../people/entities/person.entity';
+import { Injectable } from '@nestjs/common';
+import { CreateAddressDto } from './dto/create-address.dto';
+import { UpdateAddressDto } from './dto/update-address.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Address } from './entities/address.entity';
+import { Repository } from 'typeorm';
+import { Person } from '../people/entities/person.entity';
 
 @Injectable()
 export class AddressService {
