@@ -1,6 +1,7 @@
 # Test Técnico Nexo Soluciones
 
-Url para probar la API: https://nexotest.juli.ar/swagger
+Url para probar la API: https://nexotest.juli.ar/
+
 Consigna: [Test Backend.pdf](./Test%20Backend.pdf)
 
 ## Descripción

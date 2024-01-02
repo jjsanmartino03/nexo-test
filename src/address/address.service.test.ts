@@ -83,6 +83,19 @@ describe('AddressService', () => {
   });
 
   it('should delete an address', async () => {
+    const persona = {
+      dni: 34567851,
+      nombre: 'Pablo',
+      apellido: 'Sanmartino',
+      edad: 20,
+      foto: 'https://githubusercontent.com/u/59868273?v=4',
+      direcciones: [new Address(), new Address()],
+    };
+    jest.spyOn(repository, 'findOne').mockResolvedValue({
+      ...dummyAddress,
+      persona,
+    });
+
     await service.remove(1);
     const address = new Address();
 
@@ -90,6 +103,7 @@ describe('AddressService', () => {
     address.calle = dummyAddress.calle;
     address.numero = dummyAddress.numero;
     address.ciudad = dummyAddress.ciudad;
+    address.persona = persona;
 
     expect(repository.remove).toHaveBeenCalledTimes(1);
     expect(repository.remove).toHaveBeenCalledWith(address);
