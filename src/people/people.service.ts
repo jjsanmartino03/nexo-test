@@ -43,6 +43,10 @@ export class PeopleService {
       where.nombre = ILike(`%${filters.nombre}%`);
     }
 
+    if (filters.edad) {
+      where.edad = filters.edad;
+    }
+
     return this.personRepository.find({
       relations: ['direcciones'],
       where,
