@@ -25,7 +25,9 @@ persona
 - **Swagger** para la documentación de la API, y para poder realizar pruebas interactivas en el navegador
 
 Aclaración: ¿Por qué elegí Node.js? La consigna no especificaba un lenguaje en particular, así que opté por el stack tecnológico que más
-conozco y con el cuál podía hacer una API en el menor tiempo posible. NestJS permite desarrollar APIs en Node.js de una manera rápida, completa y de forma modular.
+conozco y con el cuál podía hacer una API en el menor tiempo posible. NestJS permite desarrollar APIs en Node.js de una 
+manera rápida, completa y de forma modular. De ser necesario, podría utilizar Laravel o Django Rest Framework para desarrollar
+esta API, ya que también tengo experiencia con estos frameworks, pero elegí NestJS por preferencia.
 
 ## Instalación
 1. Clonar el repositorio
@@ -62,7 +64,8 @@ La estructura de cada módulo es la siguiente:
 - **Test**: Contiene los tests de cada módulo, que se encargan de probar los controladores y servicios
 
 ## Documentación
-La documentación de la API se encuentra en la ruta `/swagger`. Allí se puede ver la documentación de cada endpoint, y realizar pruebas interactivas.
+La documentación de la API se encuentra en la ruta `/swagger`. Allí se puede ver la documentación de cada endpoint, y realizar pruebas interactivas. Para obtener el archivo
+`swagger.json` se debe acceder a la ruta `/swagger-json`, o en su defecto utilizar el archivo `swagger.json` que se encuentra en la carpeta raíz.
 
 ## Esquema de la base de datos
 ![img.png](db.png)

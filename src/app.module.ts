@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AddressModule } from './address/address.module';
 import { PhotosModule } from './photos/photos.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { PhotosModule } from './photos/photos.module';
     AddressModule,
     PhotosModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
